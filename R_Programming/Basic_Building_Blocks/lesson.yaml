@@ -249,5 +249,5 @@
     from Dr. Boltin?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: submit_log()
+  AnswerTests: submit_google_form()
   Hint: ""
