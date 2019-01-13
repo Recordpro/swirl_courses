@@ -5,5 +5,4 @@
 
 swirl_options(swirl_logging = TRUE)
 
-if (!require("pacman")) install.packages("pacman")
-pacman::p_load_gh("data-steve/googleformr")
+devtools::install_github("data-steve/googleformr", dependencies = TRUE)
