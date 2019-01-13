@@ -4,6 +4,3 @@
 # throughout the lesson.
 
 swirl_options(swirl_logging = TRUE)
-
-install.packages("devtools")
-devtools::install_github("data-steve/googleformr", dependencies = TRUE)
