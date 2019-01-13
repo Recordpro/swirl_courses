@@ -4,7 +4,7 @@
   Author: Nick Carchedi
   Type: Standard
   Organization: JHU Biostat
-  Version: 2.2.0
+  Version: 2.4.1
 
 - Class: text
   Output: In this lesson, we will explore some basic building blocks of the R programming
