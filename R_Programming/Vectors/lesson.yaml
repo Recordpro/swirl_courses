@@ -262,5 +262,5 @@
     Coursera.org?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: submit_log()
   Hint: ""
