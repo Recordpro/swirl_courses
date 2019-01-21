@@ -26,3 +26,5 @@ viewinfo <- function() {
   file.edit(.infopath)
   return(.infopath)
 }
+
+swirl_options(swirl_logging = TRUE)

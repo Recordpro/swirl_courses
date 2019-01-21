@@ -33,3 +33,5 @@ viewinfo <- function() {
 ok <- function() {
   invisible()
 }
+
+swirl_options(swirl_logging = TRUE)
