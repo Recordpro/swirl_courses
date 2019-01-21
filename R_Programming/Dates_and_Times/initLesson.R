@@ -20,3 +20,5 @@
 # eedata <- read.csv(.path2data, as.is=TRUE)
 # eedata$dob <- as.Date(eedata$dob)
 # eedata$hire_date <- as.Date(eedata$hire_date)
+
+swirl_options(swirl_logging = TRUE)

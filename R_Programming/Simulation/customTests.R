@@ -64,33 +64,37 @@ getExpr <- function(){
   getState()$expr
 }
 
-coursera_on_demand <- function(){
-  selection <- getState()$val
-  if(selection == "Yes"){
-    email <- readline("What is your email address? ")
-    token <- readline("What is your assignment token? ")
-    
-    payload <- sprintf('{  
-      "assignmentKey": "DfYFAK8cEeW3mhLW1_Ertw",
-      "submitterEmail": "%s",  
-      "secret": "%s",  
-      "parts": {  
-        "abfsG": {  
-          "output": "correct"  
-        }  
-      }  
-    }', email, token)
-    url <- 'https://www.coursera.org/api/onDemandProgrammingScriptSubmissions.v1'
+# Retrieve the log from swirl's state
+getLog <- function(){
+  getState()$log
+}
+
+submit_log <- function(){
   
-    respone <- httr::POST(url, body = payload)
-    if(respone$status_code >= 200 && respone$status_code < 300){
-      message("Grade submission succeeded!")
-    } else {
-      message("Grade submission failed.")
-      message("Press ESC if you want to exit this lesson and you")
-      message("want to try to submit your grade at a later time.")
-      return(FALSE)
-    }
+  # Please edit the link below
+  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSdbTUZOKpi8ur6B2NqlZOtcXbkiOofHHB5YmmmVNu4iQKHCow/viewform?usp=pp_url"
+
+  
+  # Do not edit the code below
+  if(!grepl("=$", pre_fill_link)){
+    pre_fill_link <- paste0(pre_fill_link, "=")
   }
-  TRUE
+  
+  p <- function(x, p, f, l = length(x)){if(l < p){x <- c(x, rep(f, p - l))};x}
+  
+  temp <- tempfile()
+  log_ <- getLog()
+  nrow_ <- max(unlist(lapply(log_, length)))
+  log_tbl <- data.frame(user = rep(log_$user, nrow_),
+                        course_name = rep(log_$course_name, nrow_),
+                        lesson_name = rep(log_$lesson_name, nrow_),
+                        question_number = p(log_$question_number, nrow_, NA),
+                        correct = p(log_$correct, nrow_, NA),
+                        attempt = p(log_$attempt, nrow_, NA),
+                        skipped = p(log_$skipped, nrow_, NA),
+                        datetime = p(log_$datetime, nrow_, NA),
+                        stringsAsFactors = FALSE)
+  write.csv(log_tbl, file = temp, row.names = FALSE)
+  encoded_log <- base64encode(temp)
+  browseURL(paste0(pre_fill_link, encoded_log))
 }
